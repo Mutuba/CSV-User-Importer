@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
   def check_repeating_characters
     password.chars.each_cons(3) do |a, b, c|
-      if a == b && b == c
+      if a.casecmp?(b) && b.casecmp?(c)
         errors.add(:password, "cannot contain three repeating characters in a row")
         break
       end

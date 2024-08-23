@@ -1,0 +1,31 @@
+<div class="container mt-4 d-flex flex-column align-items-center justify-content-center min-vh-100">
+  <h1 class="mb-4 text-center">Users CSV Upload</h1>
+
+  <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#uploadModal">
+    Upload CSV
+  </button>
+
+  <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadModalLabel">Upload CSV</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_for :user, url: users_path, html: { multipart: true, data: { turbo: true } } do |f| %>
+            <div class="form-group d-flex align-items-center justify-content-center">
+              <%= f.file_field :file, accept: ".csv", class: "form-control" %>
+            </div>
+            <div class="actions mt-4">
+              <%= f.submit "Upload File", class: "btn btn-primary mr-2" %>
+            </div>
+          <% end %>
+          <p class="mt-4 text-center">
+            You can click <a href="/">here</a> to download a sample CSV file.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
