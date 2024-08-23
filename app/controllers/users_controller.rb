@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def create    
+  def create
     if file_missing?
       redirect_to(users_path, alert: "Please upload a file")
     elsif !valid_csv_file?
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
       user = User.new(name: row["name"], password: row["password"])
       flash.now[:error] ||= []
-      flash.now[:error] << "Error in row: #{row.inspect} - #{user.errors.full_messages.join(', ')}" unless user.save
+      flash.now[:error] << "Error in row: #{row.inspect} - #{user.errors.full_messages.join(", ")}" unless user.save
     end
   end
 

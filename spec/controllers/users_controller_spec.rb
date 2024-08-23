@@ -25,7 +25,7 @@ RSpec.describe(UsersController, type: :controller) do
 
   it "sets an alert if an invalid file type is uploaded" do
     file = fixture_file_upload("users.txt", "text/plain")
-    post :create, params: { user: { file: file }}
+    post :create, params: { user: { file: file } }
     expect(flash[:alert]).to(eq("Please upload a valid CSV file"))
   end
 end
