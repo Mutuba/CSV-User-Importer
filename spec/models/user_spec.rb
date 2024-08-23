@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
     context 'with valid attributes' do
       let(:user) { build(:user) }
 
-      it 'is valid' do
+      it 'is valid with valid attributes' do
         expect(user).to be_valid
         expect(user.errors.full_messages).to be_empty
       end
@@ -34,11 +34,12 @@ RSpec.describe User, type: :model do
 
       it 'is invalid' do
         expect(user).not_to be_valid
-        expect(user.errors.full_messages).to include("Password can't be blank", "Password is too short (minimum is 10 characters)")
+        expect(user.errors.full_messages).to include("Password can't be blank",
+                                                     'Password is too short (minimum is 10 characters)')
       end
     end
 
-    context 'when the password is weak' do
+    context 'with a weak password' do
       let(:user) { build(:user, password: 'Abc123') }
 
       it 'is invalid' do
@@ -47,7 +48,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'when the password has three repeating characters' do
+    context 'with three repeating characters in password' do
       let(:user) { build(:user, password: 'AAAfk1swods') }
 
       it 'is invalid' do
