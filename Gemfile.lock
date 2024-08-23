@@ -268,6 +268,8 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-shopify (2.15.1)
+      rubocop (~> 1.51)
     ruby-progressbar (1.13.0)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
@@ -309,6 +311,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-22
   arm64-darwin-23
   x86_64-linux
 
@@ -332,6 +335,7 @@ DEPENDENCIES
   rspec
   rspec-rails
   rubocop-rails (~> 2.3)
+  rubocop-shopify
   shoulda-matchers (~> 6.0)
   sprockets-rails
   stimulus-rails

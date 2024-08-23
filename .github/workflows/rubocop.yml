@@ -1,0 +1,26 @@
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2.2"
+          bundler-cache: true
+
+      - name: Install PostgreSQL (macOS)
+        if: runner.os == 'macOS'
+        run: brew install postgresql
+
+      - name: Install PostgreSQL (Ubuntu)
+        if: runner.os == 'Linux'
+        run: sudo apt-get install libpq-dev
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
