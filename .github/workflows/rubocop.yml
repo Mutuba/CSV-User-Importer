@@ -1,8 +1,3 @@
-# .github/workflows/rubocop.yml
-name: Lint code with RuboCop
-
-on: [push, pull_request]
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -18,6 +13,14 @@ jobs:
         with:
           ruby-version: "3.2.2"
           bundler-cache: true
+
+      - name: Install PostgreSQL (macOS)
+        if: runner.os == 'macOS'
+        run: brew install postgresql
+
+      - name: Install PostgreSQL (Ubuntu)
+        if: runner.os == 'Linux'
+        run: sudo apt-get install libpq-dev
 
       - name: Run RuboCop
         run: bundle exec rubocop
