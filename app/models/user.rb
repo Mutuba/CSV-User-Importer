@@ -40,5 +40,5 @@ class User < ApplicationRecord
         break
       end
     end
-  end  
+  end
 end

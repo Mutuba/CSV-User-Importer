@@ -1,0 +1,11 @@
+<div class="container d-flex align-items-center justify-content-center">
+  <div>
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% elsif alert %>
+      <div class="alert alert-primary" role="alert">
+        <%= alert %>
+      </div>
+    <% end %>
+  </div>
+</div>
