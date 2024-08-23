@@ -14,26 +14,29 @@
 
 ActiveRecord::Schema[7.1].define(version: 20_240_823_113_954) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'name', null: false
-    t.string 'password', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "users", force: :cascade do |t|
+    t.string("name", null: false)
+    t.string("password", null: false)
+    t.datetime("created_at", null: false)
+    t.datetime("updated_at", null: false)
     # Prevent three repeating characters in a row
-    t.check_constraint \
+    t.check_constraint(
       "NOT password::text ~ '(.)\\1\\1'::text",
-      name: 'password_no_repeating_characters_check'
+      name: "password_no_repeating_characters_check",
+    )
 
     # Ensure the password length is between 10 and 16 characters
-    t.check_constraint \
-      'char_length(password::text) >= 10 AND char_length(password::text) <= 16',
-      name: 'password_length_check'
+    t.check_constraint(
+      "char_length(password::text) >= 10 AND char_length(password::text) <= 16",
+      name: "password_length_check",
+    )
 
     # Ensure the password contains at least one lowercase letter, one uppercase letter, and one digit
-    t.check_constraint \
+    t.check_constraint(
       "password::text ~ '[a-z]'::text AND password::text ~ '[A-Z]'::text AND password::text ~ '[0-9]'::text",
-      name: 'password_complexity_check'
+      name: "password_complexity_check",
+    )
   end
 end

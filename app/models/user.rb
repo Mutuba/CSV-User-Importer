@@ -16,27 +16,27 @@ class User < ApplicationRecord
   end
 
   def check_lowercase
-    return unless password.chars.none? { |char| ('a'..'z').include?(char) }
+    return unless password.chars.none? { |char| ("a".."z").include?(char) }
 
-    errors.add(:password, 'must contain at least one lowercase letter')
+    errors.add(:password, "must contain at least one lowercase letter")
   end
 
   def check_uppercase
-    return unless password.chars.none? { |char| ('A'..'Z').include?(char) }
+    return unless password.chars.none? { |char| ("A".."Z").include?(char) }
 
-    errors.add(:password, 'must contain at least one uppercase letter')
+    errors.add(:password, "must contain at least one uppercase letter")
   end
 
   def check_digit
-    return unless password.chars.none? { |char| ('0'..'9').include?(char) }
+    return unless password.chars.none? { |char| ("0".."9").include?(char) }
 
-    errors.add(:password, 'must contain at least one digit')
+    errors.add(:password, "must contain at least one digit")
   end
 
   def check_repeating_characters
     password.chars.each_cons(3) do |a, b, c|
       if a == b && b == c
-        errors.add(:password, 'cannot contain three repeating characters in a row')
+        errors.add(:password, "cannot contain three repeating characters in a row")
         break
       end
     end
