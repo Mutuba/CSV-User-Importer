@@ -3,36 +3,57 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context 'with valid name and password' do
-    let(:user) { build(:user) }
-    it 'is valid' do
-      expect(user).to be_valid
+  describe 'Database Schema' do
+    context 'column validations' do
+      it { should have_db_column(:name).of_type(:string) }
+      it { should have_db_column(:password).of_type(:string) }
     end
   end
 
-  context 'when name is nil' do
-    let(:user) { build(:user, name: nil) }
+  describe 'Validations' do
+    context 'with valid attributes' do
+      let(:user) { build(:user) }
 
-    it 'is invalid' do
-      expect(user).not_to be_valid
+      it 'is valid' do
+        expect(user).to be_valid
+        expect(user.errors.full_messages).to be_empty
+      end
+    end
+
+    context 'when name is nil' do
+      let(:user) { build(:user, name: nil) }
+
+      it 'is invalid' do
+        expect(user).not_to be_valid
+        expect(user.errors.full_messages).to include("Name can't be blank")
+      end
+    end
+
+    context 'when password is nil' do
+      let(:user) { build(:user, password: nil) }
+
+      it 'is invalid' do
+        expect(user).not_to be_valid
+        expect(user.errors.full_messages).to include("Password can't be blank", "Password is too short (minimum is 10 characters)")
+      end
+    end
+
+    context 'when the password is weak' do
+      let(:user) { build(:user, password: 'Abc123') }
+
+      it 'is invalid' do
+        expect(user).not_to be_valid
+        expect(user.errors.full_messages).to include('Password is too short (minimum is 10 characters)')
+      end
+    end
+
+    context 'when the password has three repeating characters' do
+      let(:user) { build(:user, password: 'AAAfk1swods') }
+
+      it 'is invalid' do
+        expect(user).not_to be_valid
+        expect(user.errors.full_messages).to include('Password cannot contain three repeating characters in a row')
+      end
     end
   end
-
-  context 'when password is nil' do
-    let(:user) { build(:user, password: nil) }
-
-    it 'is invalid' do
-      expect(user).not_to be_valid
-    end
-  end
-
-  # it "is invalid with a weak password" do
-  #   user = User.new(name: "John Doe", password: "Abc123")
-  #   expect(user).not_to be_valid
-  # end
-
-  # it "is invalid with a password that has three repeating characters" do
-  #   user = User.new(name: "John Doe", password: "AAAfk1swods")
-  #   expect(user).not_to be_valid
-  # end
 end
