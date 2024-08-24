@@ -3,6 +3,9 @@
 require "csv"
 
 class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
   def create
     if file_missing?
       handle_error("Please upload a file")
