@@ -2,7 +2,8 @@
 
 class UsersCsvUploadJob < ApplicationJob
   include Sidekiq::Status::Worker
-  queue_as :default
+
+  queue_as :users_csv_upload
 
   sidekiq_options timeout: 300, retry: 5
 
