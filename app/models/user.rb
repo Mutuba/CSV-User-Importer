@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { in: 10..16 }
   validate :strong_password, unless: -> { password.blank? }
 
+  after_create_commit { broadcast_append_to "users" }
+
   private
 
   def strong_password

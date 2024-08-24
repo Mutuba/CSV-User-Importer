@@ -47,7 +47,6 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 gem "rubocop-shopify", require: false
 gem "twitter-bootstrap-rails"
-
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
