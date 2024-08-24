@@ -72,6 +72,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "rubocop-rails", "~> 2.3"
   gem "shoulda-matchers", "~> 6.0"
+  gem "rails-controller-testing"
 end
 
 gem "view_component", "~> 3.0"
