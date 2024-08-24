@@ -38,8 +38,8 @@ RSpec.describe(UsersController, type: :controller) do
       get :index
 
       expect(response).to(have_http_status(:ok))
-      expect(assigns(:users).count).to eq(users.count)
-      expect(assigns(:users)).to match_array(users)
+      expect(assigns(:users).count).to(eq(users.count))
+      expect(assigns(:users)).to(match_array(users))
     end
   end
 end

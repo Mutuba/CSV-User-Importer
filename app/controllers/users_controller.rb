@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @users = User.all
 
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render(json: @users) }
     end
   end
@@ -18,10 +18,13 @@ class UsersController < ApplicationController
     elsif !valid_csv_file?
       handle_error("Please upload a valid CSV file")
     else
-      process_csv_file(params[:file])
-      respond_to do |format|
-        format.html { redirect_to(users_path, notice: "CSV upload completed") }
-        format.json { render(json: { success: true }, status: :created) }
+      begin
+        FileWriterService.call(
+          file: params[:file],
+          base_url: request.base_url,
+        )
+      rescue StandardError => e
+        handle_error("Something went wrong, #{e.message}")
       end
     end
   end
