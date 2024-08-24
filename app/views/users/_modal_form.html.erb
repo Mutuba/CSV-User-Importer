@@ -1,0 +1,22 @@
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">Upload CSV</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: @user, url: users_path, local: false, data: { turbo_frame: 'users', controller: 'upload', action: 'submit->upload#handleSubmit' } do |f| %>
+          <div class="form-group">
+            <input accept=".csv" class="form-control" data-upload-target="fileInput" type="file" name="file" id="file">
+          </div>
+          <div data-upload-target="errorMessage" class="d-none text-danger"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= f.submit "Upload File", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -47,7 +47,6 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 gem "rubocop-shopify", require: false
 gem "twitter-bootstrap-rails"
-
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
@@ -73,6 +72,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "rubocop-rails", "~> 2.3"
   gem "shoulda-matchers", "~> 6.0"
+  gem "rails-controller-testing"
 end
 
 gem "view_component", "~> 3.0"
