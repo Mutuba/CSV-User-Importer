@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-# UsersCsvUploadJob
 class UsersCsvUploadJob < ApplicationJob
   include Sidekiq::Status::Worker
   queue_as :default
 
-  sidekiq_options lock: :until_executed, on_conflict: :reject
+  sidekiq_options timeout: 300, retry: 5
 
   def perform(**params)
     string_file_path = params.fetch(:string_file_path)
@@ -16,6 +15,7 @@ class UsersCsvUploadJob < ApplicationJob
       UsersCsvImportService.call(file_path:, base_url:)
     rescue StandardError => e
       Rails.logger.error("An error occurred: #{e.message}")
+      raise e
     end
   end
 end
