@@ -13,7 +13,7 @@ RSpec.describe(UsersCsvUploadJob, type: :job) do
 
     it "calls UsersCsvImportService with correct parameters" do
       expect(UsersCsvImportService).to(receive(:call).with(file_path: Rails.root.join(file_path), base_url: base_url))
-      described_class.perform_now(string_file_path: file_path, base_url: base_url)
+      UsersCsvUploadJob.perform_now(string_file_path: file_path, base_url: base_url)
     end
   end
 
@@ -39,7 +39,7 @@ RSpec.describe(UsersCsvUploadJob, type: :job) do
     it "logs errors and raises exceptions on failure" do
       expect(@logger).to(receive(:error).with(/An error occurred: Test error/))
       expect do
-        described_class.perform_now(string_file_path: file_path, base_url: base_url)
+        UsersCsvUploadJob.perform_now(string_file_path: file_path, base_url: base_url)
       end.to(raise_error(StandardError, "Test error"))
     end
   end
