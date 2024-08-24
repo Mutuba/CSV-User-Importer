@@ -53,7 +53,7 @@ RSpec.describe(UsersCsvUploadJob, type: :job) do
       expect do
         UsersCsvUploadJob.perform_later(
           string_file_path: file_path,
-          base_url: base_url
+          base_url: base_url,
         )
       end.to(change { ActiveJob::Base.queue_adapter.enqueued_jobs.count }.by(1))
 

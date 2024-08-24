@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         file: params[:file],
         base_url: request.base_url,
       )
-      render(json: { success: true, message: "Upload successful!" }, status: :ok)
+      render(json: { success: true, message: "Upload in progress!" }, status: :ok)
     rescue StandardError => e
       handle_error("Something went wrong, #{e.message}")
     end
