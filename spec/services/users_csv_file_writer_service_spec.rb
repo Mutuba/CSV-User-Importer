@@ -3,7 +3,7 @@
 require "rails_helper"
 require "securerandom"
 
-RSpec.describe(FileWriterService, type: :service) do
+RSpec.describe(UsersCsvFileWriterService, type: :service) do
   let(:base_url) { Faker::Internet.url }
   let(:file_content) { "sample content" }
   let(:file) { instance_double("Tempfile", read: file_content) }

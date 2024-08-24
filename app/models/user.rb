@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-# User model handles user data and validates the presence and strength of passwords.
 class User < ApplicationRecord
   validates :name, presence: true
   validates :password, presence: true, length: { in: 10..16 }
   validate :strong_password, unless: -> { password.blank? }
-
-  after_create_commit { broadcast_append_to "users" }
 
   private
 

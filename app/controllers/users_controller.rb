@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "csv"
-
 class UsersController < ApplicationController
   def index
     @users = User.all
@@ -13,19 +11,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    if file_missing?
-      handle_error("Please upload a file")
-    elsif !valid_csv_file?
-      handle_error("Please upload a valid CSV file")
-    else
-      begin
-        FileWriterService.call(
-          file: params[:file],
-          base_url: request.base_url,
-        )
-      rescue StandardError => e
-        handle_error("Something went wrong, #{e.message}")
-      end
+    return handle_error("Please upload a file") if file_missing?
+    return handle_error("Please upload a valid CSV file") unless valid_csv_file?
+
+    begin
+      UsersCsvFileWriterService.call(
+        file: params[:file],
+        base_url: request.base_url,
+      )
+      render(json: { success: true, message: "Upload successful!" }, status: :ok)
+    rescue StandardError => e
+      handle_error("Something went wrong, #{e.message}")
     end
   end
 
@@ -37,18 +33,6 @@ class UsersController < ApplicationController
 
   def valid_csv_file?
     params[:file].content_type == "text/csv"
-  end
-
-  def process_csv_file(file)
-    CSV.foreach(file.path, headers: true) do |row|
-      next if row["name"].blank? && row["password"].blank?
-
-      user = User.new(name: row["name"], password: row["password"])
-      unless user.save
-        flash.now[:error] ||= []
-        flash.now[:error] << "Error in row: #{row.inspect} - #{user.errors.full_messages.join(", ")}"
-      end
-    end
   end
 
   def handle_error(message)

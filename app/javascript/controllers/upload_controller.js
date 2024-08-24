@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["fileInput", "errorMessage", "successMessage"];
+  static targets = ["fileInput", "errorMessage"];
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -21,7 +21,6 @@ export default class extends Controller {
       const data = await response.json();
       if (response.ok) {
         this.clearModal();
-        this.displaySuccess("Upload successful!");
       } else {
         this.displayError(data.error || "Upload failed. Please try again.");
       }
@@ -34,13 +33,6 @@ export default class extends Controller {
     if (this.hasErrorMessageTarget) {
       this.errorMessageTarget.textContent = message;
       this.errorMessageTarget.classList.remove("d-none");
-    }
-  }
-
-  displaySuccess(message) {
-    if (this.hasSuccessMessageTarget) {
-      this.successMessageTarget.textContent = message;
-      this.successMessageTarget.classList.remove("d-none");
     }
   }
 
