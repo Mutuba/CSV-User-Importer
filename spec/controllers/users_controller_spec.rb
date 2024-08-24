@@ -7,16 +7,17 @@ RSpec.describe(UsersController, type: :controller) do
     it "creates users from a valid CSV file" do
       file = fixture_file_upload("users.csv", "text/csv")
       post :create, params: { file: file }
+
+      perform_enqueued_jobs(only: UsersCsvUploadJob)
       expect(User.count).to(eq(1))
-      expect(flash[:notice]).to(eq("CSV upload completed"))
+      expect(JSON.parse(response.body)["message"]).to(eq("Upload in progress!"))
     end
 
     it "does not create users from an invalid CSV file" do
       file = fixture_file_upload("invalid_users.csv", "text/csv")
       post :create, params: { file: file }
+      perform_enqueued_jobs(only: UsersCsvUploadJob)
       expect(User.count).to(eq(0))
-      error_messages = flash.now[:error]
-      expect(error_messages).to(include(a_string_including("Error in row")))
     end
 
     it "sets an alert if no file is uploaded" do

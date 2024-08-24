@@ -40,8 +40,8 @@ class UsersCsvFileWriterService < ApplicationService
     )
   end
 
-  def handle_error(exception_class, message)
+  def handle_error(message)
     Rails.logger.error(message)
-    raise exception_class, message
+    raise
   end
 end
