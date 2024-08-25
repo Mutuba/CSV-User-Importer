@@ -20,7 +20,19 @@ jobs:
 
       - name: Install PostgreSQL (Ubuntu)
         if: runner.os == 'Linux'
-        run: sudo apt-get install libpq-dev
+        run: sudo apt-get install -y libpq-dev
+
+      - name: Install PostgreSQL (Windows)
+        if: runner.os == 'Windows'
+        run: choco install postgresql
 
       - name: Run RuboCop
         run: bundle exec rubocop
+
+      - name: Setup Database
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+
+      - name: Run Tests
+        run: bundle exec rspec
