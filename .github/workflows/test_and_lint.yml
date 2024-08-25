@@ -63,8 +63,5 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Install Gems
-        run: bundle install
-
       - name: Lint Ruby Files
         run: bundle exec rubocop --parallel
