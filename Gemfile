@@ -29,7 +29,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem "activerecord-import"
-
+gem "cloudinary"
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
 gem "sidekiq"
@@ -41,16 +41,13 @@ gem "brakeman"
 gem "bootsnap", require: false
 gem "rubocop-shopify", require: false
 
-group :development do
+group :development, :test do
   gem "annotate"
   gem "web-console"
-end
-
-group :test do
-  gem "rspec-sidekiq"
   gem "capybara"
   gem "selenium-webdriver"
   gem "byebug"
+  gem "debug", platforms: [:mri, :mingw, :x64_mingw]
   gem "database_cleaner"
   gem "factory_bot_rails"
   gem "faker"
@@ -60,6 +57,10 @@ group :test do
   gem "rspec-rails"
   gem "shoulda-matchers", "~> 6.0"
   gem "rails-controller-testing"
+end
+
+group :test do
+  gem "rspec-sidekiq"
 end
 
 gem "rails_12factor", group: :production

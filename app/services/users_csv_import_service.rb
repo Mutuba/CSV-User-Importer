@@ -7,7 +7,6 @@ class UsersCsvImportService < ApplicationService
   def initialize(**params)
     super()
     @file_path = params.fetch(:file_path)
-    @base_url = params.fetch(:base_url)
   end
 
   def call
