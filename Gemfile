@@ -62,5 +62,4 @@ group :test do
   gem "rails-controller-testing"
 end
 
-gem 'rails_12factor', group: :production
-
+gem "rails_12factor", group: :production
