@@ -16,7 +16,7 @@ class UsersCsvFileWriterService < ApplicationService
   private
 
   def generate_file_path
-    Rails.root.join("tmp", "user-import-#{SecureRandom.uuid}.csv")
+    Rails.root.join("lib", "user-import-#{SecureRandom.uuid}.csv")
   end
 
   def write_file(file_path)
