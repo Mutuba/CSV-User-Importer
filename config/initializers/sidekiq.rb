@@ -6,7 +6,7 @@ require "sidekiq-status"
 Sidekiq.configure_client do |config|
   config.redis = {
     url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1"),
-    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
   }
 
   Sidekiq::Status.configure_client_middleware(config, expiration: 30.minutes.to_i)
@@ -15,7 +15,7 @@ end
 Sidekiq.configure_server do |config|
   config.redis = {
     url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1"),
-    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
   }
 
   Sidekiq::Status.configure_server_middleware(config, expiration: 30.minutes.to_i)
