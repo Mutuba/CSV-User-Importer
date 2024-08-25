@@ -5,7 +5,7 @@ class UsersCsvUploadJob < ApplicationJob
 
   queue_as :users_csv_upload
 
-  sidekiq_options timeout: 300, retry: 5
+  sidekiq_options timeout: 300000, retry: 5
 
   def perform(**params)
     string_file_path = params.fetch(:string_file_path)
