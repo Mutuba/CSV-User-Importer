@@ -29,11 +29,11 @@ RSpec.describe(UsersCsvImportService, type: :service) do
     end
 
     context "when the file does not exist" do
-      let(:non_existing_file_file_path) { "non_existing_file.csv" }
+      let(:fake_file_path) { "fake.csv" }
 
       it "raises an Errno::ENOENT error" do
         expect do
-          described_class.call(file_path: non_existing_file_file_path, base_url: base_url)
+          described_class.call(file_path: fake_file_path, base_url: base_url)
         end.to(raise_error(Errno::ENOENT))
       end
     end

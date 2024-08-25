@@ -22,7 +22,7 @@ RSpec.describe(UsersController, type: :controller) do
 
     it "sets an alert if no file is uploaded" do
       post :create
-      expect(flash[:alert]).to(eq("Please upload a file"))
+      expect(flash[:alert]).to(eq("Please attach a file before clicking upload!"))
     end
 
     it "sets an alert if an invalid file type is uploaded" do

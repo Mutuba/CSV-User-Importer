@@ -11,6 +11,9 @@ end
 require "rspec/rails"
 require "sidekiq/testing"
 require "database_cleaner"
+require "capybara/rails"
+require "capybara/rspec"
+require "selenium/webdriver"
 
 Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |f| require f }
 
@@ -28,14 +31,26 @@ if Rails.env.test?
 end
 
 RSpec.configure do |config|
-  config.include(ActiveJob::TestHelper)
-  ActiveJob::Base.queue_adapter = :test
+  config.include(ActiveJob::TestHelper, type: :model)
+  config.include(ActiveJob::TestHelper, type: :controller)
+  config.include(ActiveJob::TestHelper, type: :request)
+  config.include(ActiveJob::TestHelper, type: :service)
+  config.include(ActiveJob::TestHelper, type: :job)
+
+  config.before(:each, type: :system) do
+    ActiveJob::Base.queue_adapter = :inline
+  end
+
+  config.after(:each, type: :system) do
+    ActiveJob::Base.queue_adapter = :test
+  end
+
   config.fixture_paths = [
     Rails.root.join("spec/fixtures"),
   ]
-
+  config.include(Capybara::DSL)
+  Capybara.default_driver = :selenium_chrome_headless
   config.use_transactional_fixtures = true
-
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 end

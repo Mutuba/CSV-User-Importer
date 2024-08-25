@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped">
+<table id="users_table" class="table table-bordered table-striped">
   <thead>
     <tr>
       <th colspan="2" class="table-header-title">
@@ -11,6 +11,12 @@
     </tr>
   </thead>
   <tbody id="users">
-    <%= render @users %>
+    <% if @users.any? %>
+      <%= render @users %>
+    <% else %>
+      <tr>
+        <td colspan="2" class="text-center">No users yet</td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

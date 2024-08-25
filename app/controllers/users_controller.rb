@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    return handle_error("Please upload a file") if file_missing?
+    return handle_error("Please attach a file before clicking upload!") if file_missing?
     return handle_error("Please upload a valid CSV file") unless valid_csv_file?
 
     begin

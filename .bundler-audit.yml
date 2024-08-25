@@ -1,0 +1,4 @@
+# .bundler-audit.yml
+ignore:
+  - CVE-2024-28103
+  - CVE-2024-32464

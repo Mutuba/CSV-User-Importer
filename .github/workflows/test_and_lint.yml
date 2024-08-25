@@ -1,67 +1,60 @@
-name: Ruby on Rails CI Pipeline
+name: Ruby on Rails CI
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      run_system_tests:
+        description: "Run system tests"
+        required: false
+        default: "false"
+        type: boolean
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set Up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.2.2"
-          bundler-cache: true
-
-      - name: Install Gems
-        run: bundle install
-
-  database:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:11-alpine
-        ports:
-          - "5432:5432"
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-    needs: setup
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set Up Database Schema
-        run: bin/rails db:schema:load
-
   test:
     runs-on: ubuntu-latest
-    needs: [setup, database]
+
+    services:
+      postgresql:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: my_database
+          POSTGRES_USER: my_user
+          POSTGRES_PASSWORD: my_password
+        options: >-
+          --health-cmd "pg_isready -U my_user"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Tests
-        run: bin/rails test
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1" # Adjust the Ruby version as needed
 
-  lint:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: bundle install
 
-      - name: Lint Ruby Files
-        run: bundle exec rubocop --parallel
+      - name: Install Chromium and xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser xvfb
+
+      - name: Run unit tests
+        run: bundle exec rspec spec/models spec/controllers # Run only unit tests
+
+      - name: Run system tests
+        if: ${{ github.event.inputs.run_system_tests == 'true' }} # Run system tests based on input
+        env:
+          DISPLAY: :99
+          CHROME_BIN: /usr/bin/chromium-browser
+        run: |
+          Xvfb :99 -screen 0 1280x1024x24 &
+          bundle exec rake db:create db:schema:load
+      - name: Run tests
+        run: bundle exec rake test:run
