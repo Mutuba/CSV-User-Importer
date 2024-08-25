@@ -61,4 +61,6 @@ group :test do
   gem "shoulda-matchers", "~> 6.0"
   gem "rails-controller-testing"
 end
-gem "view_component", "~> 3.0"
+
+gem 'rails_12factor', group: :production
+
