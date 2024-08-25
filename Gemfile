@@ -58,7 +58,6 @@ group :test do
   gem "pry-rails"
   gem "rspec"
   gem "rspec-rails"
-  gem "rubocop-rails", "~> 2.3"
   gem "shoulda-matchers", "~> 6.0"
   gem "rails-controller-testing"
 end
