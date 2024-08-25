@@ -80,6 +80,6 @@ group :development, :test do
 end
 
 group :test do
- gem "rspec-sidekiq"
+  gem "rspec-sidekiq"
 end
 gem "view_component", "~> 3.0"
