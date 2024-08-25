@@ -27,7 +27,9 @@ class UsersCsvFileWriterService < ApplicationService
     handle_error("File not found: #{e.message}")
   rescue Errno::ENOSPC => e
     handle_error("Disk full: #{e.message}")
-  rescue Encoding::UndefinedConversionError, Encoding::InvalidByteSequenceError => e
+  rescue Encoding::UndefinedConversionError => e
+    handle_error("Encoding error: #{e.message}")
+  rescue Encoding::InvalidByteSequenceError => e
     handle_error("Encoding error: #{e.message}")
   rescue StandardError => e
     handle_error("IO error: #{e.message}")

@@ -16,7 +16,7 @@ class UsersCsvUploadJob < ApplicationJob
       UsersCsvImportService.call(file_path:, base_url:)
     rescue StandardError => e
       Rails.logger.error("An error occurred: #{e.message}")
-      raise e
+      raise
     end
   end
 end
