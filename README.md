@@ -1,24 +1,59 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- User Import Monitor
 
-Things you may want to cover:
+- The application allows a user to upload a csv file with user details (name and password)
+- Upon uploading the file, the application will process and return a list of created users and errors for records not created.
 
-* Ruby version
+- This application uses Ruby version 3.2.2 To install, use rvm or rbenv.
 
-* System dependencies
+- RVM
 
-* Configuration
+`rvm install 3.2.2`
 
-* Database creation
+`rvm use 3.2.2`
 
-* Database initialization
+- Rbenv
 
-* How to run the test suite
+`rbenv install 3.2.2`
 
-* Services (job queues, cache servers, search engines, etc.)
+- Bundler provides a consistent environment for Ruby projects by tracking and installing
+  the exact gems and versions that are needed. I recommend bundler version 2.0.2. To install:
 
-* Deployment instructions
+- You need Rails. The rails version being used is rails version 7
 
-* ...
+- To install:
+
+`gem install rails -v '~> 7'`
+
+\*To get up and running with the project locally, follow the following steps.
+
+- Clone the app
+
+- With SSH
+
+`git@github.com:Mutuba/csv-test-app.git`
+
+- With HTTPS
+
+`https://github.com/Mutuba/csv-test-app.git`
+
+- Move into the directory and install all the requirements.
+
+- cd csv-test-app
+
+- run `bundle install` to install application packages
+
+- Run `rails db:create` to create a database for the application
+
+- Run `rails db:migrate` to run database migrations and create database tables
+
+- The application can be run by running the below command:-
+
+`rails s` or `rails server`
+
+- To run tests, run the following command
+  `rspec`
+
+Screenshots:
+TBD
