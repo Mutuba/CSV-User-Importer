@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class UsersCsvUploadJob < ApplicationJob
   include Sidekiq::Status::Worker
 
@@ -8,14 +6,26 @@ class UsersCsvUploadJob < ApplicationJob
   sidekiq_options timeout: 300000, retry: 5
 
   def perform(**params)
-    string_file_path = params.fetch(:string_file_path)
+    string_file_url = params.fetch(:string_file_path)
+    temp_file = Tempfile.new(['users', '.csv'])
 
     begin
-      file_path = Rails.root.join(string_file_path)
-      UsersCsvImportService.call(file_path:)
+      download_file(string_file_url, temp_file.path)
+      UsersCsvImportService.call(file_path: temp_file.path)
     rescue StandardError => e
       Rails.logger.error("An error occurred: #{e.message}")
       raise
+    ensure
+      temp_file.close
+      temp_file.unlink
+    end
+  end
+
+  private
+
+  def download_file(url, output_path)
+    File.open(output_path, 'wb') do |file|
+      file.write(Net::HTTP.get(URI.parse(url)))
     end
   end
 end
