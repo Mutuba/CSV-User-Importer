@@ -1,3 +1,2 @@
-release: bash ./release.sh
-web: puma -C config/puma.rb
-worker: bundle exec sidekiq -e production -C config/sidekiq.yml
+web: bundle exec rails server
+worker: bundle exec sidekiq -C config/sidekiq.yml
