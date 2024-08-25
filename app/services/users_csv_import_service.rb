@@ -86,15 +86,15 @@ class UsersCsvImportService < ApplicationService
 
   def stream_failed_users(failed_instances)
     return unless failed_instances&.any?
-  
+
     @users_errors = failed_instances.map { |(_, user_with_errors)| user_with_errors }
-    
+
     failed_instances.each do |(_, user_with_errors)|
       Turbo::StreamsChannel.broadcast_append_to(
         "users_errors",
         target: "users_errors",
         partial: "users/user_error",
-        locals: { user: user_with_errors }
+        locals: { user: user_with_errors },
       )
     end
   end
