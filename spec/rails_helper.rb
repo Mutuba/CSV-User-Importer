@@ -3,21 +3,28 @@
 require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+
+if Rails.env.production?
+  abort("The Rails environment is running in production mode!")
+end
+
 require "rspec/rails"
 require "sidekiq/testing"
 require "database_cleaner"
+
 Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |f| require f }
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
   abort(e.to_s.strip)
 end
 
-Sidekiq::Testing.inline!
-
-RSpec::Sidekiq.configure do |config|
-  config.warn_when_jobs_not_processed_by_sidekiq = false
+if Rails.env.test?
+  Sidekiq::Testing.inline!
+  RSpec::Sidekiq.configure do |config|
+    config.warn_when_jobs_not_processed_by_sidekiq = false
+  end
 end
 
 RSpec.configure do |config|

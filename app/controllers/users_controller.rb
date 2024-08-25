@@ -3,6 +3,7 @@
 class UsersController < ApplicationController
   def index
     @users = User.all
+    @users_errors = []
 
     respond_to do |format|
       format.html

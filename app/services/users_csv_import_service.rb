@@ -60,6 +60,7 @@ class UsersCsvImportService < ApplicationService
       batch_size: 2,
       batch_progress: progress,
       returning: [:id, :name, :created_at, :updated_at],
+      track_validation_failures: true,
     )
   end
 
@@ -84,17 +85,17 @@ class UsersCsvImportService < ApplicationService
   end
 
   def stream_failed_users(failed_instances)
-    return unless failed_instances&.size&.positive?
+    return unless failed_instances&.any?
 
-    failed_instances.each_slice(2) do |array_instance|
-      array_instance.each do |element|
-        Turbo::StreamsChannel.broadcast_append_to(
-          "users",
-          target: "users",
-          partial: "users/user",
-          locals: { user: element },
-        )
-      end
+    @users_errors = failed_instances.map { |(_, user_with_errors)| user_with_errors }
+
+    failed_instances.each do |(_, user_with_errors)|
+      Turbo::StreamsChannel.broadcast_append_to(
+        "users_errors",
+        target: "users_errors",
+        partial: "users/user_error",
+        locals: { user: user_with_errors },
+      )
     end
   end
 end

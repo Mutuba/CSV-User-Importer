@@ -40,34 +40,27 @@ gem "sidekiq-status"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:windows, :jruby]
-
+gem "dotenv-rails"
+gem "tzinfo-data"
+gem "bundler-audit"
+gem "brakeman"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 gem "rubocop-shopify", require: false
-gem "twitter-bootstrap-rails"
+
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "annotate"
   gem "web-console"
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
 end
 
-group :development, :test do
-  gem "annotate"
+group :test do
+  gem "rspec-sidekiq"
+  gem 'capybara'
+  gem 'selenium-webdriver'
   gem "byebug"
   gem "database_cleaner"
-  gem "debug", platforms: [:mri, :windows]
-  gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "faker"
   gem "pry-doc"
@@ -77,7 +70,5 @@ group :development, :test do
   gem "rubocop-rails", "~> 2.3"
   gem "shoulda-matchers", "~> 6.0"
   gem "rails-controller-testing"
-  gem "rspec-sidekiq"
 end
-
 gem "view_component", "~> 3.0"
