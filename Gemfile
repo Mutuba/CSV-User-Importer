@@ -50,7 +50,6 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 gem "rubocop-shopify", require: false
-gem "twitter-bootstrap-rails"
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
