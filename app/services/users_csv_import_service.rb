@@ -30,7 +30,7 @@ class UsersCsvImportService < ApplicationService
       Rails.logger.info(e.message)
       raise
     ensure
-      FileUtils.rm(@file_path)
+      FileUtils.rm(@file_path) if @file_path
     end
 
     instance = import_users(urls_array)

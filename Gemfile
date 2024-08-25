@@ -34,20 +34,11 @@ gem "activerecord-import"
 gem "redis", ">= 4.0.1"
 gem "sidekiq"
 gem "sidekiq-status"
-
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
 gem "dotenv-rails"
 gem "tzinfo-data"
 gem "bundler-audit"
 gem "brakeman"
-# Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
 gem "rubocop-shopify", require: false
 
 group :development do
@@ -57,8 +48,8 @@ end
 
 group :test do
   gem "rspec-sidekiq"
-  gem 'capybara'
-  gem 'selenium-webdriver'
+  gem "capybara"
+  gem "selenium-webdriver"
   gem "byebug"
   gem "database_cleaner"
   gem "factory_bot_rails"

@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped">
+<table id="users_error_table" class="table table-bordered table-striped">
   <thead>
     <tr>
       <th colspan="2" class="table-header-title">
@@ -11,6 +11,12 @@
     </tr>
   </thead>
   <tbody id="users_errors">
-    <%= render @users_errors %>
+    <% if @users_errors.any? %>
+      <%= render @users_errors %>
+    <% else %>
+      <tr>
+        <td colspan="2" class="text-center text-muted">No errors yet</td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
