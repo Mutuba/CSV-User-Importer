@@ -8,12 +8,12 @@
 
 ## Features
 
-User Model: Validates user data with strong password requirements.
-CSV Upload: Upload and process CSV files containing user names and passwords.
-Cloud Storage: Utilizes Cloudinary for file storage and retrieval.
-Background Processing: Handles CSV processing in the background using Sidekiq.
-Real-time Updates: Provides real-time progress updates and results using Turbo Streams.
-StimulusJS: Manages form interactions and dynamic updates on the front end (views).
+- User Model: Validates user data with strong password requirements.
+- CSV Upload: Upload and process CSV files containing user names and passwords.
+- Cloud Storage: Utilizes Cloudinary for file storage and retrieval.
+- Background Processing: Handles CSV processing in the background using Sidekiq.
+- Real-time Updates: Provides real-time progress updates and results using Turbo Streams.
+- StimulusJS: Manages form interactions and dynamic updates on the front end (views).
 
 ## Technologies
 
