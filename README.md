@@ -22,7 +22,7 @@
 - Sidekiq for background job processing
 - Turbo Streams for real-time updates
 - StimulusJS for frontend behavior
-- PostgreSQL for database management
+- PostgreSQL for data management
 
 ## Setup
 
