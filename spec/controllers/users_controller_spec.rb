@@ -6,10 +6,10 @@ RSpec.describe(UsersController, type: :controller) do
   describe "#create" do
     it "creates users from a valid CSV file", vcr: true do
       file = fixture_file_upload("users.csv", "text/csv")
-      expect {
-        post :create, params: { file: file }
-      }.to have_enqueued_job(UsersCsvUploadJob)
-    
+      expect do
+        post(:create, params: { file: file })
+      end.to(have_enqueued_job(UsersCsvUploadJob))
+
       perform_enqueued_jobs(only: UsersCsvUploadJob)
       expect(JSON.parse(response.body)["message"]).to(eq("Upload in progress!"))
     end
