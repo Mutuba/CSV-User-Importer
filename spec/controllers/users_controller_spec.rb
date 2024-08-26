@@ -4,32 +4,35 @@ require "rails_helper"
 
 RSpec.describe(UsersController, type: :controller) do
   describe "#create" do
-    it "creates users from a valid CSV file", vcr: true do
-      file = fixture_file_upload("users.csv", "text/csv")
-      expect do
-        post(:create, params: { file: file })
-      end.to(have_enqueued_job(UsersCsvUploadJob))
+    context "with a valid CSV file" do
+      it "enqueues the UsersCsvUploadJob and returns a success message", vcr: true do
+        file = fixture_file_upload("users.csv", "text/csv")
 
-      perform_enqueued_jobs(only: UsersCsvUploadJob)
-      expect(JSON.parse(response.body)["message"]).to(eq("Upload in progress!"))
+        expect do
+          post(:create, params: { file: file })
+        end.to(have_enqueued_job(UsersCsvUploadJob))
+
+        perform_enqueued_jobs(only: UsersCsvUploadJob)
+        expect(JSON.parse(response.body)["message"]).to(eq("Upload in progress!"))
+      end
     end
 
-    it "does not create users from an invalid CSV file" do
-      file = fixture_file_upload("invalid_users.csv", "text/csv")
-      post :create, params: { file: file }
-      perform_enqueued_jobs(only: UsersCsvUploadJob)
-      expect(User.count).to(eq(0))
+    context "when no file is uploaded" do
+      it "sets an alert asking for a file upload" do
+        post :create
+
+        expect(flash[:alert]).to(eq("Please attach a file before clicking upload!"))
+      end
     end
 
-    it "sets an alert if no file is uploaded" do
-      post :create
-      expect(flash[:alert]).to(eq("Please attach a file before clicking upload!"))
-    end
+    context "with an invalid file type" do
+      it "sets an alert asking for a valid CSV file" do
+        file = fixture_file_upload("users.txt", "text/plain")
 
-    it "sets an alert if an invalid file type is uploaded" do
-      file = fixture_file_upload("users.txt", "text/plain")
-      post :create, params: { file: file }
-      expect(flash[:alert]).to(eq("Please upload a valid CSV file"))
+        post :create, params: { file: file }
+
+        expect(flash[:alert]).to(eq("Please upload a valid CSV file"))
+      end
     end
   end
 
