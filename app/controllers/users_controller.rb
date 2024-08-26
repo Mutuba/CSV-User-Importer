@@ -16,8 +16,12 @@ class UsersController < ApplicationController
     return handle_error("Please upload a valid CSV file") unless valid_csv_file?
 
     begin
-      CsvFileUploadService.call(file: params[:file])
-      render(json: { success: true, message: "Upload in progress!" }, status: :ok)
+      result = CsvFileUploadService.call(file: params[:file])
+      if result.success?
+        render(json: { success: true, message: "Upload in progress!" }, status: :ok)
+      else
+        handle_error("Something went wrong with upload!")
+      end
     rescue StandardError => e
       handle_error("Something went wrong, #{e.message}")
     end
