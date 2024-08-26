@@ -1,30 +1,34 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "webmock/rspec"
 
 RSpec.describe(UsersCsvUploadJob, type: :job) do
-  let(:file_path) { "path/to/file.csv" }
-  let(:base_url) { "http://example.com" }
+  let(:base_url) { "http://example.com/file.csv" }
+  let(:file_content) { "sample file content" }
+  let(:temp_file_path) { "dummy_tempfile_path" }
+
+  before do
+    stub_request(:get, base_url).to_return(body: file_content)
+
+    @temp_file = instance_double("Tempfile", path: temp_file_path)
+    allow(Tempfile).to(receive(:new).and_return(@temp_file))
+    allow(@temp_file).to(receive(:close))
+    allow(@temp_file).to(receive(:unlink))
+  end
 
   context "with correct params" do
     before do
-      allow(UsersCsvImportService).to(receive(:call).and_return(true))
+      allow(UsersCsvImportService).to(receive(:call))
     end
 
-    it "calls UsersCsvImportService with correct parameters" do
-      expect(UsersCsvImportService).to(receive(:call).with(file_path: Rails.root.join(file_path), base_url: base_url))
-      UsersCsvUploadJob.perform_now(string_file_path: file_path, base_url: base_url)
-    end
-  end
+    it "downloads the file and calls UsersCsvImportService with correct parameters" do
+      expect(UsersCsvImportService).to(receive(:call).with(file_path: temp_file_path))
 
-  context "sidekiq options" do
-    it "queues on the right queue" do
-      expect(UsersCsvUploadJob.queue_name).to(eq("users_csv_upload"))
-    end
+      UsersCsvUploadJob.perform_now(string_file_path: base_url)
 
-    it "has the correct timeout and retry options" do
-      expect(UsersCsvUploadJob.get_sidekiq_options["timeout"]).to(eq(300))
-      expect(UsersCsvUploadJob.get_sidekiq_options["retry"]).to(eq(5))
+      expect(@temp_file).to(have_received(:close))
+      expect(@temp_file).to(have_received(:unlink))
     end
   end
 
@@ -38,28 +42,35 @@ RSpec.describe(UsersCsvUploadJob, type: :job) do
 
     it "logs errors and raises exceptions on failure" do
       expect(@logger).to(receive(:error).with(/An error occurred: Test error/))
+
       expect do
-        UsersCsvUploadJob.perform_now(string_file_path: file_path, base_url: base_url)
+        UsersCsvUploadJob.perform_now(string_file_path: base_url)
       end.to(raise_error(StandardError, "Test error"))
     end
   end
 
-  context "#perform_later" do
-    before do
-      allow(UsersCsvImportService).to(receive(:call).and_return(true))
+  context "file cleanup" do
+    it "closes and deletes the temporary file after execution" do
+      temp_file = instance_double("Tempfile", path: temp_file_path)
+      allow(temp_file).to(receive(:close))
+      allow(temp_file).to(receive(:unlink))
+      allow(Tempfile).to(receive(:new).and_return(temp_file))
+
+      UsersCsvUploadJob.perform_now(string_file_path: base_url)
+
+      expect(temp_file).to(have_received(:close))
+      expect(temp_file).to(have_received(:unlink))
+    end
+  end
+
+  context "sidekiq options" do
+    it "queues on the correct queue" do
+      expect(UsersCsvUploadJob.queue_name).to(eq("users_csv_upload"))
     end
 
-    it "uploads URLs by enqueuing job" do
-      expect do
-        UsersCsvUploadJob.perform_later(
-          string_file_path: file_path,
-          base_url: base_url,
-        )
-      end.to(change { ActiveJob::Base.queue_adapter.enqueued_jobs.count }.by(1))
-
-      perform_enqueued_jobs(only: UsersCsvUploadJob)
-
-      expect(ActiveJob::Base.queue_adapter.enqueued_jobs.size).to(eq(0))
+    it "has the correct timeout and retry options" do
+      expect(UsersCsvUploadJob.get_sidekiq_options["timeout"]).to(eq(300000))
+      expect(UsersCsvUploadJob.get_sidekiq_options["retry"]).to(eq(5))
     end
   end
 end

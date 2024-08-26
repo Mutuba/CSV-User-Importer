@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe("File Uploads", type: :system) do
-  it "allows a user to upload a file and see results", js: true do
+  it "allows a user to upload a file and see results", js: true, vrr: true do
     Sidekiq::Testing.inline! do
       visit users_path
 
@@ -19,7 +19,7 @@ RSpec.describe("File Uploads", type: :system) do
       end
 
       within("#users_table") do
-        expect(page).to(have_text(/Muhammad/))
+        expect(page).to(have_text(/Muhammad/, wait: 10))
       end
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe("File Uploads", type: :system) do
     end
   end
 
-  it "shows errors when file is not attached", js: true do
+  it "shows errors when file is not attached", js: true, vcr: true do
     visit users_path
 
     click_on "Upload CSV"

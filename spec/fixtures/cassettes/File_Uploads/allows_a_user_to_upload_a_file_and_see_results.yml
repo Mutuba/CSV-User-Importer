@@ -1,0 +1,262 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://127.0.0.1:57042/__identify__
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '5'
+    body:
+      encoding: UTF-8
+      string: '20040'
+  recorded_at: Mon, 26 Aug 2024 02:49:48 GMT
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/dsrvrjdsl/raw/upload
+    body:
+      encoding: UTF-8
+      string: "-------------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972\r\nContent-Disposition:
+        form-data; name=\"timestamp\"\r\n\r\n1724640589\r\n-------------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972\r\nContent-Disposition:
+        form-data; name=\"overwrite\"\r\n\r\n1\r\n-------------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972\r\nContent-Disposition:
+        form-data; name=\"unique_filename\"\r\n\r\n0\r\n-------------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972\r\nContent-Disposition:
+        form-data; name=\"use_filename\"\r\n\r\n1\r\n-------------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"RackMultipart20240826-29619-hr01gk.csv\"\r\nContent-Length:
+        42\r\nContent-Type: application/octet-stream\r\nContent-Transfer-Encoding:
+        binary\r\n\r\nname,password\r\n,\r\nMuhammad,QPFJWz1343439\r\n\r\n-------------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972\r\nContent-Disposition:
+        form-data; name=\"signature\"\r\n\r\n6d741e6551655b662617c4c7d8729547b1dcbbd2\r\n-------------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972\r\nContent-Disposition:
+        form-data; name=\"api_key\"\r\n\r\n894569618199779\r\n-------------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972--\r\n"
+    headers:
+      User-Agent:
+      - CloudinaryRuby/2.1.2 (Ruby 3.2.2-p53)
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost-48d5ae533dc8cf80c2cf38bb8afe1972
+      Content-Length:
+      - '1158'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Aug 2024 02:49:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Request-Id:
+      - 8046eea28758cebccaace46710d95d07
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - W/"59add22c9bd1a0bdedde6a920b308439"
+      Server:
+      - cloudinary
+    body:
+      encoding: ASCII-8BIT
+      string: '{"asset_id":"093a11b7ad4eb2b79a8a8db42c9427d4","public_id":"RackMultipart20240826-29619-hr01gk.csv","version":1724640591,"version_id":"8bf531b9c6a56406f01c7e8d87c2a9ef","signature":"4e687b2f15b9cbc3aa47db087c95c0740e89e2b5","resource_type":"raw","created_at":"2024-08-26T02:49:51Z","tags":[],"bytes":42,"type":"upload","etag":"6418aca3c62a42d6d77031c1e6b5d9d6","placeholder":false,"url":"http://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724640591/RackMultipart20240826-29619-hr01gk.csv","secure_url":"https://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724640591/RackMultipart20240826-29619-hr01gk.csv","folder":"","original_filename":"RackMultipart20240826-29619-hr01gk","api_key":"894569618199779"}'
+  recorded_at: Mon, 26 Aug 2024 02:49:51 GMT
+- request:
+    method: get
+    uri: http://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724640591/RackMultipart20240826-29619-hr01gk.csv
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - res.cloudinary.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/csv
+      Etag:
+      - '"6418aca3c62a42d6d77031c1e6b5d9d6"'
+      Last-Modified:
+      - Mon, 26 Aug 2024 02:49:52 GMT
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 26 Aug 2024 02:49:51 GMT
+      Content-Length:
+      - '42'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - public, no-transform, immutable, max-age=2592000
+      X-Request-Id:
+      - 8046eea28758cebccaace46710d95d07
+      Access-Control-Expose-Headers:
+      - Content-Length,Content-Disposition,Content-Range,Etag,Server-Timing,Vary,X-Cld-Error
+      Access-Control-Allow-Origin:
+      - "*"
+      Accept-Ranges:
+      - bytes
+      Timing-Allow-Origin:
+      - "*"
+      Server:
+      - Cloudinary
+      Strict-Transport-Security:
+      - max-age=604800
+      Server-Timing:
+      - cld-akam;dur=248;cpu=143;start=2024-08-26T02:49:51.573Z;desc=miss,rtt;dur=14,cloudinary;dur=24;start=2024-08-26T02:49:51.690Z
+    body:
+      encoding: UTF-8
+      string: "name,password\r\n,\r\nMuhammad,QPFJWz1343439\r\n"
+  recorded_at: Mon, 26 Aug 2024 02:49:51 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:57154/__identify__
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '5'
+    body:
+      encoding: UTF-8
+      string: '20040'
+  recorded_at: Mon, 26 Aug 2024 02:54:26 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:57167/__identify__
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '5'
+    body:
+      encoding: UTF-8
+      string: '20040'
+  recorded_at: Mon, 26 Aug 2024 02:55:02 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:57184/__identify__
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '5'
+    body:
+      encoding: UTF-8
+      string: '20040'
+  recorded_at: Mon, 26 Aug 2024 02:55:18 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:57223/__identify__
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '5'
+    body:
+      encoding: UTF-8
+      string: '20040'
+  recorded_at: Mon, 26 Aug 2024 02:55:31 GMT
+- request:
+    method: get
+    uri: http://127.0.0.1:57248/__identify__
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '5'
+    body:
+      encoding: UTF-8
+      string: '20040'
+  recorded_at: Mon, 26 Aug 2024 02:55:44 GMT
+recorded_with: VCR 6.3.1

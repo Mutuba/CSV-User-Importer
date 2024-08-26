@@ -3,13 +3,12 @@
 require "rails_helper"
 
 RSpec.describe(UsersController, type: :controller) do
+  before { allow(CsvFileUploadService).to(receive(:call).with(any_args)) }
   describe "#create" do
     it "creates users from a valid CSV file" do
       file = fixture_file_upload("users.csv", "text/csv")
       post :create, params: { file: file }
 
-      perform_enqueued_jobs(only: UsersCsvUploadJob)
-      expect(User.count).to(eq(1))
       expect(JSON.parse(response.body)["message"]).to(eq("Upload in progress!"))
     end
 

@@ -43,7 +43,6 @@ gem "rubocop-shopify", require: false
 
 group :development, :test do
   gem "annotate"
-  gem "web-console"
   gem "capybara"
   gem "selenium-webdriver"
   gem "byebug"
@@ -61,6 +60,9 @@ end
 
 group :test do
   gem "rspec-sidekiq"
+  gem "webmock"
+  gem "vcr"
 end
 
 gem "rails_12factor", group: :production
+gem "web-console", group: :development
