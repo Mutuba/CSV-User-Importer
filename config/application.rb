@@ -28,9 +28,6 @@ module UserUploadApp
     config.load_defaults(7.1)
     config.autoload_lib(ignore: ["assets", "tasks"])
     config.active_job.queue_adapter = :sidekiq
-    config.serve_static_assets = true
-    config.assets.complie = true
-    config.serve_static_assests = true
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
