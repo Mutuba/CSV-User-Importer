@@ -145,22 +145,6 @@ password: The user's password (required).
 
 - `bundle exec rspec spec/system`
 
-## Contributing
-
-- Contributions are welcome! Please open an issue or submit a pull request with any improvements or bug fixes.
-
-## License
-
--This project is licensed under the MIT License. See the LICENSE file for details.
-
-## Acknowledgments
-
-- Cloudinary for image and file storage.
-- Sidekiq for background job processing.
-- Turbo Rails for real-time updates.
-- StimulusJS for frontend interactions.
-- activerecord-import gem for bulk import and streaming updates, fetching created and failed records with error messages. [link](https://github.com/zdennis/activerecord-import)
-
 # Implementation and thoughts
 
 ## Folder structure
@@ -331,3 +315,19 @@ Using Cloudinary avoids potential issues with local file storage on platforms li
 ### Potential Improvements:
 
 - Enhanced Constraints: Consider additional constraints or rules for password complexity if further security enhancements are deemed necessary.
+
+## Contributing
+
+- Contributions are welcome! Please open an issue or submit a pull request with any improvements or bug fixes.
+
+## License
+
+-This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Acknowledgments
+
+- Cloudinary for image and file storage.
+- Sidekiq for background job processing.
+- Turbo Rails for real-time updates.
+- StimulusJS for frontend interactions.
+- activerecord-import gem for bulk import and streaming updates, fetching created and failed records with error messages. [link](https://github.com/zdennis/activerecord-import)
