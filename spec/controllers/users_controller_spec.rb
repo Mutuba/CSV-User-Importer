@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe(UsersController, type: :controller) do
   describe "#create" do
     context "with a valid CSV file" do
+      # TODO: should maybe allow a full test suite with VCR
       before { allow(CloudinaryFileUploadService).to(receive(:call).and_return(double(success?: true))) }
       it "returns a success message" do
         file = fixture_file_upload("users.csv", "text/csv")
