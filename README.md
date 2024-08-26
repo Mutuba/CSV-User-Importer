@@ -137,6 +137,14 @@ password: The user's password (required).
 - Must include at least one lowercase letter, one uppercase letter, and one digit.
 - Cannot have three consecutive repeating characters.
 
+## Screenshots
+
+<img width="1440" alt="Screenshot 2024-08-26 at 09 53 20" src="https://github.com/user-attachments/assets/52271ee8-b087-464b-895e-73370a762806">
+
+
+<img width="1436" alt="Screenshot 2024-08-26 at 09 53 41" src="https://github.com/user-attachments/assets/3c7c89de-9008-423f-904c-a3967232051d">
+
+
 ## Testing
 
 ## Running Tests
