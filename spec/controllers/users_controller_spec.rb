@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe(UsersController, type: :controller) do
   describe "#create" do
-    context "with a valid CSV file" do
+    context "with a valid CSV file", vcr: true do
       it "enqueues the UsersCsvUploadJob and returns a success message", vcr: true do
         file = fixture_file_upload("users.csv", "text/csv")
 

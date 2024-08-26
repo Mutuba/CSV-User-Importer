@@ -7,13 +7,11 @@ class UsersCsvUploadJob < ApplicationJob
   include Sidekiq::Status::Worker
 
   queue_as :users_csv_upload
-
   sidekiq_options timeout: 300000, retry: 5
 
   def perform(**params)
     string_file_url = params.fetch(:string_file_path)
     temp_file = Tempfile.new(["users", ".csv"])
-
     begin
       download_file(string_file_url, temp_file.path)
       UsersCsvImportService.call(file_path: temp_file.path)
