@@ -97,6 +97,10 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 `bundle exec sidekiq`
 
+## Start Redis (in a separate terminal):
+
+`redis-server`
+
 ## Usage
 
 - Visit the homepage:
