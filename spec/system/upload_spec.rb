@@ -4,23 +4,21 @@ require "rails_helper"
 
 RSpec.describe("File Uploads", type: :system) do
   it "allows a user to upload a file and see results", js: true, vrr: true do
-    Sidekiq::Testing.inline! do
-      visit users_path
+    visit users_path
 
-      click_on "Upload CSV"
-      expect(page).to(have_selector("#uploadModal", visible: true))
-      expect(page).to(have_selector('input[type="file"]', visible: true))
-      within("#uploadModal") do
-        attach_file("file", Rails.root.join("spec/fixtures/files/users.csv"))
-        click_on "Upload File"
-      end
-      within("#users_table") do
-        expect(page).to(have_text(/Muhammad/, wait: 10))
-      end
+    click_on "Upload CSV"
+    expect(page).to(have_selector("#uploadModal", visible: true))
+    expect(page).to(have_selector('input[type="file"]', visible: true))
+    within("#uploadModal") do
+      attach_file("file", Rails.root.join("spec/fixtures/files/users.csv"))
+      click_on "Upload File"
+    end
+    within("#users_table") do
+      expect(page).to(have_text(/Muhammad/, wait: 10))
     end
   end
 
-  it "shows errors when file upload fails", js: true do
+  it "shows errors when file upload fails", js: true, vcr: true do
     visit users_path
 
     find("button", text: "Upload CSV").click

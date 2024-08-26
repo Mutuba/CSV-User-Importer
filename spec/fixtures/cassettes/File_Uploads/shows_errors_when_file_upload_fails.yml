@@ -1,0 +1,125 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/dsrvrjdsl/raw/upload
+    body:
+      encoding: UTF-8
+      string: "-------------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0\r\nContent-Disposition:
+        form-data; name=\"timestamp\"\r\n\r\n1724673237\r\n-------------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0\r\nContent-Disposition:
+        form-data; name=\"overwrite\"\r\n\r\n1\r\n-------------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0\r\nContent-Disposition:
+        form-data; name=\"unique_filename\"\r\n\r\n0\r\n-------------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0\r\nContent-Disposition:
+        form-data; name=\"use_filename\"\r\n\r\n1\r\n-------------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"RackMultipart20240826-5528-crqfhd.csv\"\r\nContent-Length:
+        82\r\nContent-Type: application/octet-stream\r\nContent-Transfer-Encoding:
+        binary\r\n\r\nname,password\n\nMaria Turing,AAAfk1swods\n,\nIsabella,Abc123\n,\nAxel,000aaaBBBccccDDD\n\r\n-------------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0\r\nContent-Disposition:
+        form-data; name=\"signature\"\r\n\r\n7f1b1956079c7383eb9af1a1d9d905def88e727c\r\n-------------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0\r\nContent-Disposition:
+        form-data; name=\"api_key\"\r\n\r\n894569618199779\r\n-------------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0--\r\n"
+    headers:
+      User-Agent:
+      - CloudinaryRuby/2.1.2 (Ruby 3.2.2-p53)
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost-2bb7b751758949612b695ba13ec78ea0
+      Content-Length:
+      - '1197'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Aug 2024 11:53:58 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Request-Id:
+      - d42ecae8efa1017176db3995e83fc87e
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - W/"d2f3ca7dfe1a0a3647c73c1c20df569a"
+      Server:
+      - cloudinary
+    body:
+      encoding: ASCII-8BIT
+      string: '{"asset_id":"2271fa36378a5894ac9022cc4891dbfa","public_id":"RackMultipart20240826-5528-crqfhd.csv","version":1724673238,"version_id":"df5dca973ecd566722bd254a1d65c39c","signature":"b57745b2661ec5187fcfbe004b62b07e87011115","resource_type":"raw","created_at":"2024-08-26T11:53:58Z","tags":[],"bytes":82,"type":"upload","etag":"8731d09322c66563fb3d98a8c36400aa","placeholder":false,"url":"http://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724673238/RackMultipart20240826-5528-crqfhd.csv","secure_url":"https://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724673238/RackMultipart20240826-5528-crqfhd.csv","folder":"","original_filename":"RackMultipart20240826-5528-crqfhd","api_key":"894569618199779"}'
+  recorded_at: Mon, 26 Aug 2024 11:53:58 GMT
+- request:
+    method: get
+    uri: http://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724673238/RackMultipart20240826-5528-crqfhd.csv
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - res.cloudinary.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/csv
+      Etag:
+      - '"8731d09322c66563fb3d98a8c36400aa"'
+      Last-Modified:
+      - Mon, 26 Aug 2024 11:53:59 GMT
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 26 Aug 2024 11:53:59 GMT
+      Content-Length:
+      - '82'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - public, no-transform, immutable, max-age=2592000
+      X-Request-Id:
+      - d42ecae8efa1017176db3995e83fc87e
+      Access-Control-Expose-Headers:
+      - Content-Length,Content-Disposition,Content-Range,Etag,Server-Timing,Vary,X-Cld-Error
+      Access-Control-Allow-Origin:
+      - "*"
+      Accept-Ranges:
+      - bytes
+      Timing-Allow-Origin:
+      - "*"
+      Server:
+      - Cloudinary
+      Strict-Transport-Security:
+      - max-age=604800
+      Server-Timing:
+      - cld-akam;dur=153;cpu=46;start=2024-08-26T11:53:58.870Z;desc=miss,rtt;dur=129,cloudinary;dur=26;start=2024-08-26T11:53:58.944Z
+    body:
+      encoding: UTF-8
+      string: |
+        name,password
+
+        Maria Turing,AAAfk1swods
+        ,
+        Isabella,Abc123
+        ,
+        Axel,000aaaBBBccccDDD
+  recorded_at: Mon, 26 Aug 2024 11:53:58 GMT
+recorded_with: VCR 6.3.1
