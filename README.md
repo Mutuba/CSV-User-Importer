@@ -77,9 +77,6 @@ rails db:create
 rails db:migrate
 ```
 
-- To run tests, run the following command
-  `rspec`
-
 ## Configure Cloudinary:
 
 You can sign up for a Cloudinary account and get your credentials.
@@ -135,6 +132,18 @@ password: The user's password (required).
 - Length: 10 to 16 characters.
 - Must include at least one lowercase letter, one uppercase letter, and one digit.
 - Cannot have three consecutive repeating characters.
+
+## Testing
+
+## Running Tests
+
+1. Run all tests
+
+- `bundle exec rspec`
+
+2. Run system tests
+
+- `bundle exec rspec spec/system`
 
 ## Contributing
 
