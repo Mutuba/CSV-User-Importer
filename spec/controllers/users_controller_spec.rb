@@ -5,13 +5,21 @@ require "rails_helper"
 RSpec.describe(UsersController, type: :controller) do
   describe "#create" do
     context "with a valid CSV file", vcr: true do
-      it "enqueues the UsersCsvUploadJob and returns a success message", vcr: true do
+      # it "enqueues the UsersCsvUploadJob and returns a success message", vcr: true do
+      #   file = fixture_file_upload("users.csv", "text/csv")
+
+      #   post(:create, params: { file: file })
+
+      #   perform_enqueued_jobs(only: UsersCsvUploadJob)
+      #   expect(JSON.parse(response.body)["message"]).to(eq("Upload in progress!"))
+      # end
+      it "enqueues the UsersCsvUploadJob and returns a success message" do
         file = fixture_file_upload("users.csv", "text/csv")
-
         post(:create, params: { file: file })
-
-        perform_enqueued_jobs(only: UsersCsvUploadJob)
+        puts "Upload in progress, #{JSON.parse(response.body)}"
+        expect(response).to(have_http_status(:ok))
         expect(JSON.parse(response.body)["message"]).to(eq("Upload in progress!"))
+        expect(UsersCsvUploadJob).to(have_been_enqueued)
       end
     end
 

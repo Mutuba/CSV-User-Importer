@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def handle_error(message)
     respond_to do |format|
-      format.html { redirect_to(users_path, alert: message) }
+      format.html { redirect_to(users_path, alert: message, status: :unprocessable_entity) }
       format.json { render(json: { success: false, error: message }, status: :unprocessable_entity) }
     end
   end
