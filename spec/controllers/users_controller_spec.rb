@@ -11,6 +11,7 @@ RSpec.describe(UsersController, type: :controller) do
         expect do
           post(:create, params: { file: file })
         end.to(have_enqueued_job(UsersCsvUploadJob))
+        puts "Enqueued jobs: #{ActiveJob::Base.queue_adapter.enqueued_jobs.inspect}"
 
         perform_enqueued_jobs(only: UsersCsvUploadJob)
         expect(JSON.parse(response.body)["message"]).to(eq("Upload in progress!"))
