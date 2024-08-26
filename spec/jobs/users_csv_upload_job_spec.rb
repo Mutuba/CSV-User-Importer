@@ -25,7 +25,10 @@ RSpec.describe(UsersCsvUploadJob, type: :job) do
     it "downloads the file and calls UsersCsvImportService with correct parameters" do
       expect(UsersCsvImportService).to(receive(:call).with(file_path: temp_file_path))
 
-      UsersCsvUploadJob.perform_now(string_file_path: base_url)
+      perform_enqueued_jobs do
+        UsersCsvUploadJob.perform_later(string_file_path: base_url)
+      end
+      assert_performed_jobs 1
 
       expect(@temp_file).to(have_received(:close))
       expect(@temp_file).to(have_received(:unlink))
