@@ -1,12 +1,12 @@
-<div class="progress">
+<div class="progress" style="width: 100%; max-width: 400px;">
   <div 
     class="progress-bar" 
     role="progressbar" 
-    style="width: <%= progress %>%;" 
+    style="width: <%= progress %>%;"
     aria-valuenow="<%= progress %>" 
     aria-valuemin="0" 
     aria-valuemax="100"
   >
-    <%= progress %>%
+    <%= progress < 100 ? "Processing #{progress}%" : "Complete #{progress}%" %>
   </div>
 </div>
