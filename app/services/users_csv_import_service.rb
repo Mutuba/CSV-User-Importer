@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "fileutils"
 
 class UsersCsvImportService < ApplicationService
   def initialize(**params)
@@ -20,7 +19,7 @@ class UsersCsvImportService < ApplicationService
 
     begin
       CSV.foreach(@file_path, headers: true) do |row|
-        next if row[0].blank? && row[1].blank?
+        next if row["name"].blank? && row["password"].blank?
 
         url_hash = process_url_hash(row)
         urls_array << url_hash
@@ -28,8 +27,6 @@ class UsersCsvImportService < ApplicationService
     rescue Errno::ENOENT, Errno::EACCES, CSV::MalformedCSVError => e
       Rails.logger.info(e.message)
       raise
-    ensure
-      FileUtils.rm(@file_path) if @file_path
     end
 
     instance = import_users(urls_array)
@@ -39,8 +36,8 @@ class UsersCsvImportService < ApplicationService
 
   def process_url_hash(row)
     User.new(
-      name: row[0],
-      password: row[1],
+      name: row["name"],
+      password: row["password"],
     )
   end
 
