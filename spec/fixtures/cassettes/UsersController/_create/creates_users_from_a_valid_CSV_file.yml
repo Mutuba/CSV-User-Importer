@@ -1,0 +1,118 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/dsrvrjdsl/raw/upload
+    body:
+      encoding: UTF-8
+      string: "-------------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01\r\nContent-Disposition:
+        form-data; name=\"timestamp\"\r\n\r\n1724663483\r\n-------------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01\r\nContent-Disposition:
+        form-data; name=\"overwrite\"\r\n\r\n1\r\n-------------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01\r\nContent-Disposition:
+        form-data; name=\"unique_filename\"\r\n\r\n0\r\n-------------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01\r\nContent-Disposition:
+        form-data; name=\"use_filename\"\r\n\r\n1\r\n-------------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"RackMultipart20240826-43575-suydk2.csv\"\r\nContent-Length:
+        42\r\nContent-Type: application/octet-stream\r\nContent-Transfer-Encoding:
+        binary\r\n\r\nname,password\r\n,\r\nMuhammad,QPFJWz1343439\r\n\r\n-------------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01\r\nContent-Disposition:
+        form-data; name=\"signature\"\r\n\r\nc9d65ff88c32344db3f7bdd624693c258436e4e9\r\n-------------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01\r\nContent-Disposition:
+        form-data; name=\"api_key\"\r\n\r\n894569618199779\r\n-------------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01--\r\n"
+    headers:
+      User-Agent:
+      - CloudinaryRuby/2.1.2 (Ruby 3.2.2-p53)
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost-9df96d4ef3167de4244e7b6a951a6c01
+      Content-Length:
+      - '1158'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Aug 2024 09:11:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Request-Id:
+      - 6e0bef3f7e5c8d8b71783d5a934890b1
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - W/"d55e2ebd174f3a2f52aa6d1ae368f208"
+      Server:
+      - cloudinary
+    body:
+      encoding: ASCII-8BIT
+      string: '{"asset_id":"68213e7e93160f89b6d11930b95418fa","public_id":"RackMultipart20240826-43575-suydk2.csv","version":1724663485,"version_id":"4648ff953d193cebad21d32a502edb91","signature":"359641c832cb4041c8076045f18296fdb8270464","resource_type":"raw","created_at":"2024-08-26T09:11:25Z","tags":[],"bytes":42,"type":"upload","etag":"6418aca3c62a42d6d77031c1e6b5d9d6","placeholder":false,"url":"http://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724663485/RackMultipart20240826-43575-suydk2.csv","secure_url":"https://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724663485/RackMultipart20240826-43575-suydk2.csv","folder":"","original_filename":"RackMultipart20240826-43575-suydk2","api_key":"894569618199779"}'
+  recorded_at: Mon, 26 Aug 2024 09:11:25 GMT
+- request:
+    method: get
+    uri: http://res.cloudinary.com/dsrvrjdsl/raw/upload/v1724663485/RackMultipart20240826-43575-suydk2.csv
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - res.cloudinary.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/csv
+      Etag:
+      - '"6418aca3c62a42d6d77031c1e6b5d9d6"'
+      Last-Modified:
+      - Mon, 26 Aug 2024 09:11:26 GMT
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 26 Aug 2024 09:15:38 GMT
+      Content-Length:
+      - '42'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - public, no-transform, immutable, max-age=2592000
+      X-Request-Id:
+      - 6e0bef3f7e5c8d8b71783d5a934890b1
+      Access-Control-Expose-Headers:
+      - Content-Length,Content-Disposition,Content-Range,Etag,Server-Timing,Vary,X-Cld-Error
+      Access-Control-Allow-Origin:
+      - "*"
+      Accept-Ranges:
+      - bytes
+      Timing-Allow-Origin:
+      - "*"
+      Server:
+      - Cloudinary
+      Strict-Transport-Security:
+      - max-age=604800
+      Server-Timing:
+      - cld-akam;dur=231;cpu=103;start=2024-08-26T09:15:38.237Z;desc=miss,rtt;dur=171,cloudinary;dur=37;start=2024-08-26T09:15:38.359Z
+    body:
+      encoding: UTF-8
+      string: "name,password\r\n,\r\nMuhammad,QPFJWz1343439\r\n"
+  recorded_at: Mon, 26 Aug 2024 09:15:38 GMT
+recorded_with: VCR 6.3.1
