@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "csv"
+require "fileutils"
 
 class UsersCsvImportService < ApplicationService
   def initialize(**params)
@@ -27,6 +28,8 @@ class UsersCsvImportService < ApplicationService
     rescue Errno::ENOENT, Errno::EACCES, CSV::MalformedCSVError => e
       Rails.logger.info(e.message)
       raise
+    ensure
+      FileUtils.rm(@file_path) if @file_path
     end
 
     instance = import_users(urls_array)
