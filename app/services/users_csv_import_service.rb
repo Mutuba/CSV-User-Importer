@@ -20,6 +20,8 @@ class UsersCsvImportService < ApplicationService
 
     begin
       CSV.foreach(@file_path, headers: true, row_sep: :auto, col_sep: ",", skip_blanks: true) do |row|
+        next if row["name"].blank? && row["password"].blank?
+
         url_hash = process_url_hash(row)
         urls_array << url_hash
       end
