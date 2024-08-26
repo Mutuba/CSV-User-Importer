@@ -160,3 +160,102 @@ password: The user's password (required).
 - Turbo Rails for real-time updates.
 - StimulusJS for frontend interactions.
 - activerecord-import gem for bulk import and streaming updates, fetching created and failed records with error messages. [link](https://github.com/zdennis/activerecord-import)
+
+# Implementation and thoughts
+
+## Folder structure
+
+```ruby
+app
+├── assets
+│ ├── config
+│ │ └── manifest.js
+│ ├── images
+│ └── stylesheets
+│ └── application.css
+├── channels
+│ └── application_cable
+│ ├── channel.rb
+│ └── connection.rb
+├── controllers
+│ ├── application_controller.rb
+│ ├── concerns
+│ └── users_controller.rb
+├── helpers
+│ ├── application_helper.rb
+│ └── users_helper.rb
+├── javascript
+│ ├── application.js
+│ └── controllers
+│ ├── application.js
+│ ├── index.js
+│ └── upload_controller.js
+├── jobs
+│ ├── application_job.rb
+│ └── users_csv_upload_job.rb
+├── mailers
+│ └── application_mailer.rb
+├── models
+│ ├── application_record.rb
+│ ├── concerns
+│ └── user.rb
+├── services
+│ ├── application_service.rb
+│ ├── cloudinary_file_upload_service.rb
+│ └── users_csv_import_service.rb
+├── validators
+│ └── strong_password_validator.rb
+└── views
+├── layouts
+│ ├── \_alerts.html.erb
+│ ├── \_navbar.html.erb
+│ ├── application.html.erb
+│ ├── mailer.html.erb
+│ └── mailer.text.erb
+└── users
+├── \_modal_form.html.erb
+├── \_progress.html.erb
+├── \_upload_button.html.erb
+├── \_user.html.erb
+├── \_user_error.html.erb
+├── \_users_error_table.html.erb
+├── \_users_table.html.erb
+└── index.html.erb
+```
+
+## Tests folder structure
+
+```ruby
+spec
+├── controllers
+│ └── users_controller_spec.rb
+├── factories
+│ └── users.rb
+├── fixtures
+│ ├── cassettes
+│ │ ├── CsvFileUploadService
+│ │ │ └── uploads_the_file_to_Cloudinary_and_enqueues_a_job.yml
+│ │ └── File_Uploads
+│ │ ├── allows_a_user_to_upload_a_file_and_see_results.yml
+│ │ └── shows_errors_when_file_is_not_attached.yml
+│ └── files
+│ ├── invalid_users.csv
+│ ├── users.csv
+│ └── users.txt
+├── jobs
+│ └── users_csv_upload_job_spec.rb
+├── models
+│ └── user_spec.rb
+├── rails_helper.rb
+├── services
+│ ├── cloudinary_file_upload_service_spec.rb
+│ └── users_csv_import_service_spec.rb
+├── spec_helper.rb
+├── support
+│ ├── factory_bot.rb
+│ └── shoulda_matchers.rb
+├── system
+│ └── upload_spec.rb
+└── validators
+└── strong_password_validator_spec.rb
+```
