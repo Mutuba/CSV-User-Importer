@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.all.order(created_at: :desc)
     @users_errors = []
 
     respond_to do |format|
