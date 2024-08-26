@@ -260,19 +260,9 @@ spec
 
 #### Reasoning:
 
-- File Storage Management: Storing files directly on Heroku or any other cloud platform can be challenging due to temporary storage limitations and filesystem constraints.
+- File Storage Management: Storing files directly on Heroku or similar platforms can be problematic due to limitations in temporary storage. Cloudinary provides a robust cloud-based solution that handles file uploads and storage efficiently.
 
-By using Cloudinary, I leverage a robust cloud-based storage solution that handles file management efficiently.
-
-- Scalability: Cloudinary is designed to handle large volumes of file uploads and offers seamless scalability.
-
-This is particularly useful for applications that need to manage and process potentially large CSV files without performance degradation. I thought about using Cloudinary for File Uploads for scalability reasons.
-
-- Ease of Integration: Cloudinary provides straightforward integration with Rails through its API, allowing me to easily upload files and retrieve their URLs for further processing.
-
-#### Improvement:
-
-Using Cloudinary avoids potential issues with local file storage on platforms like Heroku, which can be ephemeral and unreliable for file storage.
+- Scalability: Cloudinary offers scalability to manage large volumes of file uploads and ensures consistent performance.
 
 ### Background Processing with Sidekiq
 
