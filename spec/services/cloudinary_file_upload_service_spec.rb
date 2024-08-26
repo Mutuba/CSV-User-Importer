@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe(CsvFileUploadService, type: :service) do
+RSpec.describe(CloudinaryFileUploadService, type: :service) do
   let(:file_path) { Rails.root.join("spec", "fixtures", "files", "users.csv") }
   let(:file) do
     Tempfile.new(["test_users", ".csv"]).tap do |f|
@@ -39,7 +39,7 @@ RSpec.describe(CsvFileUploadService, type: :service) do
 
     it "returns a success result with the correct attributes" do
       result = service
-      expect(result).to(be_a(CsvFileUploadService::SuccessStruct))
+      expect(result).to(be_a(CloudinaryFileUploadService::SuccessStruct))
       expect(result.file_url).to(eq(cloudinary_response["url"]))
       expect(result.public_id).to(eq(cloudinary_response["public_id"]))
     end
@@ -52,7 +52,7 @@ RSpec.describe(CsvFileUploadService, type: :service) do
 
     it "returns a failure result with the correct error message" do
       result = described_class.call(file: file)
-      expect(result).to(be_a(CsvFileUploadService::FailureStruct))
+      expect(result).to(be_a(CloudinaryFileUploadService::FailureStruct))
       expect(result.error).to(eq("Some error occurred"))
     end
 
@@ -68,7 +68,7 @@ RSpec.describe(CsvFileUploadService, type: :service) do
 
     it "returns a failure result with the correct error message" do
       result = described_class.call(file: file)
-      expect(result).to(be_a(CsvFileUploadService::FailureStruct))
+      expect(result).to(be_a(CloudinaryFileUploadService::FailureStruct))
       expect(result.error).to(eq("Unexpected error"))
     end
 

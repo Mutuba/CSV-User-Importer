@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe(UsersController, type: :controller) do
-  before { allow(CsvFileUploadService).to(receive(:call).and_return(double(success?: true))) }
+  before { allow(CloudinaryFileUploadService).to(receive(:call).and_return(double(success?: true))) }
   describe "#create" do
     it "creates users from a valid CSV file" do
       file = fixture_file_upload("users.csv", "text/csv")

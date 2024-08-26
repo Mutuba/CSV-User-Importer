@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     return handle_error("Please upload a valid CSV file") unless valid_csv_file?
 
     begin
-      result = CsvFileUploadService.call(file: params[:file])
+      result = CloudinaryFileUploadService.call(file: params[:file])
       if result.success?
         render(json: { success: true, message: "Upload in progress!" }, status: :ok)
       else

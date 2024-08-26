@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CsvFileUploadService < ApplicationService
+class CloudinaryFileUploadService < ApplicationService
   SuccessStruct = Struct.new(:file_url, :public_id) do
     def success?
       true
