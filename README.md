@@ -97,13 +97,13 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 `rails server`
 
-## Start Sidekiq (in a separate terminal):
-
-`bundle exec sidekiq`
-
 ## Start Redis (in a separate terminal):
 
 `redis-server`
+
+## Start Sidekiq (in a separate terminal):
+
+`bundle exec sidekiq`
 
 ## Usage
 
