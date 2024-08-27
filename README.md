@@ -105,7 +105,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 - Visit the homepage:
 
-- Open your web browser and navigate to http://localhost:3000/users.
+- Open your web browser and navigate to http://localhost:3000
 
 ## Upload a CSV file:
 
