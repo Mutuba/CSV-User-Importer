@@ -11,7 +11,7 @@
 - User Model: Validates user data with strong password requirements.
 - CSV Upload: Upload and process CSV files containing user names and passwords.
 - Cloud Storage: Utilizes Cloudinary for file storage and retrieval.
-- Background Processing: Handles CSV processing in the background using Sidekiq.
+- Background Processing: Handles CSV processing in the background using Sidekiq and Redis.
 - Real-time Updates: Provides real-time progress updates and results using Turbo Streams.
 - StimulusJS: Manages form interactions and dynamic updates on the front end (views).
 
@@ -23,6 +23,8 @@
 - Turbo Streams for real-time updates
 - StimulusJS for frontend behavior
 - PostgreSQL for data management
+- Sidekiq for background job processing
+- Redis for background job enqueuing
 
 ## Setup
 
@@ -30,6 +32,8 @@
 - Ruby 3.2.2
 - Rails 7.1.3
 - PostgreSQL
+- Sidekiq
+- Redis
 
 ## Ruby and Rails installation
 
