@@ -56,13 +56,13 @@
 
 - Clone the repository:
 
-- With SSH
+#### With SSH
 
 `git clone https://github.com/your-username/CSV-User-Importer.git`
 
 `cd CSV-User-Importer`
 
-- With HTTPS
+#### With HTTPS
 
 `https://github.com/Mutuba/CSV-User-Importer.git`
 
