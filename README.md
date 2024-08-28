@@ -288,7 +288,7 @@ spec
 
 - Batch Processing: The activerecord-import gem facilitates efficient bulk imports by processing records in batches. This reduces the number of database transactions and improves performance compared to creating records one by one.
 
-- Validation Handling: The gem supports validation failures, allowing us to identify and report issues with specific records without halting the entire import process.
+- Validation Handling: The gem supports validation failures, allowing to identify and report issues with specific records without halting the entire import process.
 
 ### Potential Improvements:
 
@@ -300,7 +300,7 @@ spec
 
 - User Experience: Providing real-time feedback on the progress of file uploads and user creation enhances the user experience by keeping users informed about the status of their requests. This approach helps users understand how much of the file has been processed and whether any errors occurred.
 
-- Turbo Streams Integration: Turbo Streams enable seamless real-time updates without requiring full-page reloads. This technology allows us to push progress updates and error messages to the frontend dynamically, ensuring that users receive immediate feedback.
+- Turbo Streams Integration: Turbo Streams enable seamless real-time updates without requiring full-page reloads. This technology allows to push progress updates and error messages to the frontend dynamically, ensuring that users receive immediate feedback.
 
 ### Potential Improvements:
 
