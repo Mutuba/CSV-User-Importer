@@ -16,14 +16,14 @@ class UsersCsvImportService < ApplicationService
   private
 
   def process_csv!
-    urls_array = []
+    users = []
 
     begin
       CSV.foreach(@file_path, headers: true, row_sep: :auto, col_sep: ",", skip_blanks: true) do |row|
         next if row["name"].blank? && row["password"].blank?
 
-        url_hash = process_url_hash(row)
-        urls_array << url_hash
+        user_instance = process_user_hash(row)
+        users << user_instance
       end
     rescue Errno::ENOENT, Errno::EACCES, CSV::MalformedCSVError => e
       Rails.logger.info(e.message)
@@ -32,19 +32,19 @@ class UsersCsvImportService < ApplicationService
       FileUtils.rm(@file_path) if @file_path
     end
 
-    instance = import_users(urls_array)
+    instance = import_users(users)
     stream_created_users(instance&.results)
     stream_failed_users(instance&.failed_instances)
   end
 
-  def process_url_hash(row)
+  def process_user_hash(row)
     User.new(
       name: row["name"],
       password: row["password"],
     )
   end
 
-  def import_users(users_array)
+  def import_users(users)
     progress = lambda { |_, num_batches, current_batch_number, _|
       progress = (current_batch_number * 100) / num_batches
       Turbo::StreamsChannel.broadcast_append_to(
@@ -55,7 +55,7 @@ class UsersCsvImportService < ApplicationService
       )
     }
     User.import(
-      users_array,
+      users,
       batch_size: 2,
       batch_progress: progress,
       returning: [:id, :name, :created_at, :updated_at],
