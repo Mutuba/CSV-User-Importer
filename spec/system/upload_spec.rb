@@ -14,7 +14,7 @@ RSpec.describe("File Uploads", type: :system) do
       click_on "Upload File"
     end
     within("#users_table") do
-      expect(page).to(have_text(/Muhammad/, wait: 10))
+      expect(page).to(have_text("Muhammad"))
     end
   end
 
