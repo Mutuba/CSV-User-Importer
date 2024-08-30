@@ -110,6 +110,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 - Visit the homepage:
 
 - Open your web browser and navigate to http://localhost:3000
+- Live app here: [link](https://users-csv-upload-app-0de05c82bf26.herokuapp.com/)
 
 ## Upload a CSV file:
 
