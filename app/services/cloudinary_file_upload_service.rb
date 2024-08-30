@@ -14,7 +14,7 @@ class CloudinaryFileUploadService < ApplicationService
   end
 
   def initialize(file:)
-    super()    
+    super()
     @file = file
   end
 
