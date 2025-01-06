@@ -43,4 +43,7 @@ class UsersController < ApplicationController
       format.json { render(json: { success: false, error: message }, status: :unprocessable_entity) }
     end
   end
+
+  def test_action_method
+  end
 end
